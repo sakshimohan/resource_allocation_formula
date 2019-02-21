@@ -11,9 +11,9 @@ D_targ = [0.2, 0.2, 0.2, 0.2, 0.1, 0.1]  # target distribution
 
 N = len(D_init) # number of districts
 
-B = [None] * M
-
 M = 50  # number of years
+
+B = [None] * M
 
 B[0] =  1000000
 
