@@ -5,18 +5,19 @@ import numpy as np
 
 M = 50  # number of years
 
-# The following lists are sample distributions of the total budget for the purpose of perfecting the code
+# The following lists are sample distributions of the total national budget. The final code will pull data for the 
+# real allocations to 29 districts in Malawi
 D_init = [0.1, 0.1, 0.1, 0.2, 0.2, 0.3]  # initial distribution
 
 D_targ = [0.2, 0.2, 0.2, 0.2, 0.1, 0.1]  # target distribution
 
-N= len(D_init) # number of districts
+N = len(D_init) # number of districts
 
 B = [None] * M
 
 B[0] =  1000000
 
-g = 0.10 # annular growth rate in total budget
+g = 0.10 # annual growth rate of total budget
 
 
 for i in range(M-1):
@@ -26,7 +27,7 @@ for i in range(M-1):
 
 # Define distribution array
 
-D = [[None]*N]*M  #(Creates a list of lists with empty entries)
+D = [[None]*N]*M  
 
 D[0] = D_init
 
@@ -40,8 +41,7 @@ A = [[None]*N]*M
 
 A[0] = [D[0][j]*B[0] for j in range(N)]
 
-# temporary arrays for use during annula iterations:
-
+# Temporary arrays for use during annual iterations:
 
 desired_budget = [None] * N
 
@@ -52,11 +52,11 @@ actual_delta = [None] * N
 
 ###########################################
 
-# apply annual iteration strategy    
+# Annual Iteration
 
 ############################################
 
-for i in range(M-1): #(loop through years)
+for i in range(M-1): # loop through years
 
     
 
@@ -110,7 +110,12 @@ for i in range(M):
 
 
 
-########################################
+    
+############################################
+
+# Calculate number of years required
+
+############################################
 
 R = [D_init[j]/D_targ[j] for j in range(N)]
 
@@ -118,7 +123,7 @@ Rmax = max(R)
 
 import math
 
-Years_needed = math.log(Rmax)/math.log(1+g)
+years_needed = math.log(Rmax)/math.log(1+g)
 
-print("years needed = ", Years_needed)
+print("years needed = ", years_needed)
 
