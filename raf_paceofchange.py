@@ -3,8 +3,6 @@
 import pandas as pd
 import numpy as np
 
-M = 50  # number of years
-
 # The following lists are sample distributions of the total national budget. The final code will pull data for the 
 # real allocations to 29 districts in Malawi
 D_init = [0.1, 0.1, 0.1, 0.2, 0.2, 0.3]  # initial distribution
@@ -14,6 +12,8 @@ D_targ = [0.2, 0.2, 0.2, 0.2, 0.1, 0.1]  # target distribution
 N = len(D_init) # number of districts
 
 B = [None] * M
+
+M = 50  # number of years
 
 B[0] =  1000000
 
