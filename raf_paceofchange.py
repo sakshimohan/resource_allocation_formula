@@ -15,7 +15,7 @@ M = 50  # number of years
 
 B = [None] * M
 
-B[0] =  1000000
+B[0] =  1000000 # This needs to be edited with the actual national resource envelope
 
 g = 0.10 # annual growth rate of total budget
 
