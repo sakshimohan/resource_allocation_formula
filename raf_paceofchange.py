@@ -1,15 +1,9 @@
-
-# coding: utf-8
-
 # This code executes the following steps:
 # 1) Set up district health service delivery cost estimate data
 # 2) Calculate proportional allocation based on total cost of Essential Health Package (EHP) delivery
 # 3) Merge with % of cost borne by partner by disease programme
 # 4) Calculate proportional allocation based on government's share of cost of Essential Health Package (EHP) delivery
 # 5) Run simulations on convergence to targeted allocation of resources assuming that no district suffers a reduction in its absolute budget size, even as proportional allocation reduces
-
-# In[467]:
-
 
 import pandas as pd
 import numpy as np
@@ -18,10 +12,6 @@ import matplotlib.pyplot as plt
 import squarify
 
 plt.style.use('ggplot')
-
-
-# In[468]:
-
 
 ## Set up Essential Health Package (EHP) cost data
 
@@ -41,26 +31,14 @@ raf_final =raf_raw.rename({'District':'district',
 
 raf_final = raf_final[0:32][:] # drop total row from dataframe
 raf_final['fullcost'] = raf_final[ehp_prog].sum(axis=1) # Add Total EHP cost column
-#raf_final.head()
-
-
-# In[469]:
-
 
 # Store EHP program names in a list
 
 ehp_prog = list(raf_final.columns[1:11].values)
 
-
-# In[470]:
-
-
 # Calculate proportional allocation to district based on total cost of EHP delivery
 
 raf_final['targ_alloc_fullcost'] = raf_final['fullcost']/(raf_final['fullcost'].sum(axis=0))
-
-
-# In[471]:
 
 
 ## Set up data on partner contribution to EHP programs
@@ -86,11 +64,6 @@ for i in ehp_prog: #convert % values to numeric values
 partner_share_prog = partner_share[1:][:] # preserve partner share in total program costs
 
 partner_share_long = partner_share_prog.T # transpose 
-#partner_share.head()
-
-
-# In[472]:
-
 
 # Reshape EHP Cost data
 raf_final_long = raf_final.set_index(['district']) # set district as index
@@ -98,33 +71,18 @@ raf_final_long = raf_final_long.stack(dropna=False) # reshape wide to long
 raf_final_long = raf_final_long.reset_index()
 raf_final_long = raf_final_long.rename({'level_1':'ehp_prog'},axis=1)
 raf_final_long = raf_final_long.set_index(['ehp_prog'])
-#raf_final_long.head()
-
-
-# In[473]:
-
 
 # Merge EHP Cost data with partner contribution data
 raf_merged = raf_final_long.join(partner_share_long, how='outer')
 raf_merged = raf_merged.drop(['fullcost','current_alloc','targ_alloc_fullcost'],axis=0)
 raf_merged = raf_merged.rename({0:'cost',
                                 'program':'partner_share%'},axis=1)
-#raf_merged.head()
-
-
-# In[474]:
-
 
 # Calculate government's share in the cost of EHP delivery
 raf_merged['govt_cost'] = (1 - raf_merged['partner_share%'])*raf_merged['cost']
 raf_merged = raf_merged.reset_index()
 
 raf_final2=raf_merged.pivot(index='district', columns='index', values=['cost','govt_cost']) # reshape long to wide
-#raf_final2.head()
-
-
-# In[475]:
-
 
 # Calculate proportional allocation to district based on government share in the cost of EHP delivery
 raf_govtcost = raf_final2.govt_cost
@@ -132,43 +90,21 @@ raf_govtcost = raf_govtcost.reset_index()
 
 raf_govtcost['fullcost'] = raf_govtcost[ehp_prog].sum(axis=1)
 raf_govtcost['targ_alloc_govtcost'] = raf_govtcost['fullcost']/(raf_govtcost['fullcost'].sum(axis=0))
-#raf_govtcost.head()
-
-
-# In[476]:
-
 
 # Merge the Total EHP cost data with government share in cost data
 raf_final2 = pd.merge(raf_govtcost, raf_final , on='district')
-#raf_final2.head()
-
-
-# In[477]:
-
 
 # Store current allocation in a list
 D_init = raf_final2[['current_alloc']]
 D_init = [i[0] for i in D_init.values.tolist()]
 
-
-# In[478]:
-
-
 # Store Full EHP Cost allocation in a list
 D_targfullcost = raf_final2[['targ_alloc_fullcost']]
 D_targfullcost = [i[0] for i in D_targfullcost.values.tolist()]
 
-
-# In[479]:
-
-
 # Store Government EHP Cost allocation in a list
 D_targgovtcost = raf_final2[['targ_alloc_govtcost']]
 D_targgovtcost = [i[0] for i in D_targgovtcost.values.tolist()]
-
-
-# In[480]:
-
 
 ## PACE OF CHANGE SIMULATION
 
@@ -273,13 +209,8 @@ def paceofchange(sim_yrs, D_init,D_targ,budget_yr1,growth_rate):
     
     print("Results stored in .csv file for Targeted distribution", D_targ)
 
-    #print(distribution)
-
-
-# In[486]:
-
-
-# Run sample simulation and 
+    
+# Run sample simulation and store results
 
 D_targ = D_targfullcost
 budget_yr1 = 22678619270
@@ -288,16 +219,9 @@ sim_yrs = 30
 paceofchange(sim_yrs, D_init,D_targ,budget_yr1,growth_rate)
 
 
-# In[487]:
-
-
 # Some useful visualizations
 totalcost_malawi = raf_govtcost.sum(axis=0)
 squarify.plot(sizes=totalcost_malawi.iloc[1:10],label = ehp_prog, alpha=.8) # weight of each disease - full EHP cost
-
-
-# In[488]:
-
 
 govtcost_malawi = raf_final.sum(axis=0)
 squarify.plot(sizes=govtcost_malawi.iloc[1:10],label = ehp_prog, alpha=.8) # weight of each disease - government EHP cost
