@@ -1,6 +1,8 @@
 # Resource Allocation Formula for the Health Sector
 
 This repository contains codes related to the implementation of a Resource Allocation Formulae for intra-governmental fiscal transfers. 
+The work was done as part of the ongoing efforts to finalise the revision of the resource allocation formula to equitably distribute the 
+health sector budget to districts in Malawi. 
 
 ## Files
 
@@ -13,3 +15,5 @@ This repository contains codes related to the implementation of a Resource Alloc
 * Paul Revill, Peter Smith, Finn McGuire, Pakwanja Twea, Gerald Manthalu for their work on the [research paper](https://www.york.ac.uk/media/che/documents/papers/researchpapers/CHERP159_health_sector_resource_formula_malawi.pdf) which serves as a starting point for this follow-up work
 
 * James Gaylard who provided vary valuable inputs in formulating the code to run the pace of change simulation
+
+*Note: This work is not endorsed by the authors of the research paper, Univesity of York or the Government of Malawi.* 
