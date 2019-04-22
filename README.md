@@ -16,4 +16,4 @@ health sector budget to districts in Malawi.
 
 * James Gaylard who provided vary valuable inputs in formulating the code to run the pace of change simulation
 
-**Note: This work is not endorsed by the authors of the research paper, University of York or the Government of Malawi.** 
+**Note: This work is not endorsed by the co-authors of the research paper, University of York or the Government of Malawi.** 
