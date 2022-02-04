@@ -10,11 +10,10 @@ health sector budget to districts in Malawi.
 
 2. Twea P, Manthalu G, **Mohan S** Allocating resources to support universal health coverage: policy processes and implementation in Malawi BMJ Global Health 2020;5:e002766. [link](https://gh.bmj.com/content/5/8/e002766)
 
-## Files
+## Scripts
 
-* The PPT contains a background on the rationale behind revising the resource allocation formula as well as visual representations of of the implications of different theoretical options available. 
-
-* Python scripts: 1. paceofchange.py - a function to carry out pace of change simulations based on a set of customisation inputs -  initial budget, growth rate, and targeted budget allocation proportions, 2. dimension_reduction.py - demonstrates the use of recursive feature elimination and backward elimination to reduce the parameters in the formula for ease of implementation
+1. paceofchange.py - a function to carry out pace of change simulations based on a set of customisation inputs -  initial budget, growth rate, and targeted budget allocation proportions
+2. dimension_reduction.py - demonstrates the use of recursive feature elimination and backward elimination to reduce the parameters in the formula for ease of implementation
 
 ## Acknowledgements
 
