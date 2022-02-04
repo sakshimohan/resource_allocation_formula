@@ -14,7 +14,7 @@ health sector budget to districts in Malawi.
 
 * The PPT contains a background on the rationale behind revising the resource allocation formula as well as visual representations of of the implications of different theoretical options available. 
 
-* The python code allows for a generalisable manipulation of data to set up for analysis on python as well as defines a function to carry out pace of change simulations based on flexible inputs provided on initial budget, growth rate, and targeted budget distritbution. 
+* Python scripts: 1. paceofchange.py - a function to carry out pace of change simulations based on a set of customisation inputs -  initial budget, growth rate, and targeted budget allocation proportions, 2. dimension_reduction.py - demonstrates the use of recursive feature elimination and backward elimination to reduce the parameters in the formula for ease of implementation
 
 ## Acknowledgements
 
